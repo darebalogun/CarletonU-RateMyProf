@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>text demo</title>
+  <style>
+  body {
+    min-width: 80px;
+  }
+  
+  p {
+      font-family: Georgia, Times, "Times New Roman", serif;
+	    font-size: 20px;
+	    font-style: normal;
+      font-variant: normal;
+      font-weight: 500;
+      line-height: 26.4px;
+  }
+  
+  .loader {
+    border: 8px solid #f3f3f3; 
+    border-top: 8px solid #616161; 
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+  </style>
+  <script type="text/javascript" src="jquery-3.3.1.js"></script>
+</head>
+<body>
+ 
+<p>Please Wait</p> 
+<div class="loader"></div>
+
+<script type="text/javascript" src="jQuerytest.js"></script>
+</body>
+</html>

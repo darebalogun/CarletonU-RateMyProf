@@ -1,0 +1,19 @@
+{
+   "manifest_version": 2,
+   
+   "name": "CarletonU - RateMyProf",
+   "description": "This extension adds a hyperlink to professors names on Carleton Central. So you dont have to copy/paste names into a search bar",
+   "version": "1.0",
+   
+   "browser_action": {
+      "default_popup": "popup.html"
+   },
+   
+   "icons": { "16": "icon16.png",
+           "48": "icon48.png",
+          "128": "icon128.png" },
+   
+   "permissions": [
+   "activeTab", "storage"
+   ]
+}
