@@ -82,8 +82,12 @@ function notOnLastPage(htmlText){
 function findProfOnCurrentPage(){
 	chrome.tabs.executeScript({file : "jquery-3.3.1.js"}, function(){ // Inject jquery library as well for good measure
 		chrome.tabs.executeScript({file : "content.js"}, function(){
-		$("p").text("Done :)");
-		$("div.loader").hide(100); 
+		setTimeout(function(){
+			$("body").css("width", "75px");
+			$("p").text("Done :)");
+			$("div.loader").hide(100); 
+		}, 1500 );
+		
   		});
   	});
 	
