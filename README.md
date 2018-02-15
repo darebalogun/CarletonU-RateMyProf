@@ -16,6 +16,8 @@ Download package files and package in Google Chrome:
 
 3. Click load unpacked extension and navigate to directory containing the extension files
 
-### Notes on first use
+### Notes 
+
+Chrome Extension might not be up to date with this repo.
 
 After installation when you first use the extension it will take a few moment to populate your local machine's storage with data scrapped from ratemyprofessor.com. Please be patient, this is a one time (per device) process.
