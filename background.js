@@ -1,5 +1,4 @@
 // Copyright Oludare Balogun
-// 
 
 /**
 * Grab html from rmp and html file is then parsed for an array of names of all professors from Carleton University on the website
@@ -32,7 +31,7 @@ function grabHTMLData(urlOffset, htmlText, profNameArray, callback){
     				var x = $("span.main", profListingArray[i]).text();
     				var y = $("a", profListingArray[i]).attr("href");
     				profNameArray.push({profName: x, ratingsPage: y});
-    			}
+    			}  			
     			callback(htmlText);	
          }
       }
@@ -46,7 +45,6 @@ function grabHTMLData(urlOffset, htmlText, profNameArray, callback){
 * @param{string} htmlText - HTML content of the page
 */
 function notOnLastPage(htmlText){
-
 	// Create a dummy HTML object with innerText = responseText. Did it this way because was having problems with responseXML
 	var dummy = document.createElement("html");
 	dummy.innerHTML = htmlText;
@@ -55,7 +53,7 @@ function notOnLastPage(htmlText){
 	var currentStep = $("span.currentStep", dummy);
 	currentStep = currentStep[0].innerText;
 	
-	// Find last step by taking the last entry in an array or all step objects
+	// Find last step by taking the last entry in an array of all step objects
 	var lastStep = $("a.step", dummy);
 	lastStep = lastStep[lastStep.length - 1].innerText;
 	currentStep = parseInt(currentStep);
@@ -64,13 +62,24 @@ function notOnLastPage(htmlText){
 	// If we are on the last page
 	if (currentStep > lastStep){
     	chrome.storage.local.set({"names" : profNameArray}, function(){
-    		findProfOnCurrentPage();
+    		findProfOnCurrentPage(); 		
     	});
     	
    // Not on last page so update urlOffset so grabHTMLData can check the next page 	
 	} else {
 		urlOffset = parseInt(urlOffset) + 20;
+		
 		urlOffset = String(urlOffset);
+		
+		var percentProgress = currentStep / lastStep;
+		
+	   percentProgress = percentProgress * 100;
+	   
+	   percentProgress = Math.round(percentProgress);
+		
+		$("div.progress-bar.progress-bar-striped.active").attr("style", "width:" + percentProgress + "%");
+		$("div.progress-bar.progress-bar-striped.active").text(percentProgress + "%");
+		
 		grabHTMLData(urlOffset, htmlText, profNameArray, notOnLastPage);
 	}
 }
@@ -83,8 +92,9 @@ function findProfOnCurrentPage(){
 	chrome.tabs.executeScript({file : "jquery-3.3.1.js"}, function(){ // Inject jquery library as well for good measure
 		chrome.tabs.executeScript({file : "content.js"}, function(){
 		setTimeout(function(){
-			$("body").css("width", "75px");
+			$("body").css("width", "95px");
 			$("p").text("Done :)");
+			$("div.progress").hide(100); 
 			$("div.loader").hide(100); 
 		}, 1500 );
 		
@@ -93,16 +103,20 @@ function findProfOnCurrentPage(){
 	
 }
 
+	$("div.loader").hide(); 
+	$("div.progress").hide();
   var htmlText;
   var profNameArray = [];
   var urlOffset = "0";
-  var stop = false;
-  
+
+// Grab locally stored data, if available. If not grab data first
  chrome.storage.local.get("names", function(items){
  	if (typeof items.names === "undefined"){
+ 		$("div.progress").show();
  		$("p").text("Initial setup may take a few moments");
  		grabHTMLData(urlOffset, htmlText, profNameArray, notOnLastPage);
  	} else {
+ 		$("div.loader").show(); 
  		findProfOnCurrentPage();
  	}	 
  });
