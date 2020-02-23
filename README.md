@@ -2,9 +2,7 @@
 Chrome Plug-in that inserts hyperlink to professors names in Carleton Central. Link goes to the professors rating page on ratemyprofessor.com
 
 ## Installation
-Install from the Google Chrome Web Store here: 
-
-https://chrome.google.com/webstore/detail/carletonu-ratemyprof/oalfhmmmfbiobpaicldohabdfeahpbaf
+Install from the Google Chrome Web Store [here](https://chrome.google.com/webstore/detail/carletonu-ratemyprof/oalfhmmmfbiobpaicldohabdfeahpbaf) 
 
 OR
 
